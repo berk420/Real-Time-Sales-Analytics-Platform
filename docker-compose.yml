@@ -1,0 +1,114 @@
+version: "3.9"
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.0
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:7.6.0
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.0
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  gateway:
+    build: ./gateway
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      Downstream__Orders: ${GATEWAY_DOWNSTREAM_ORDERS}
+      Downstream__Products: ${GATEWAY_DOWNSTREAM_PRODUCTS}
+      Downstream__Analytics: ${GATEWAY_DOWNSTREAM_ANALYTICS}
+    depends_on:
+      - order-service
+      - product-service
+      - analytics-service
+
+  order-service:
+    build: ./order-service
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: ${ORDER_SERVICE_CONNECTION_STRING}
+      Kafka__BootstrapServers: ${KAFKA_BROKER}
+      Kafka__OrderCreatedTopic: ${KAFKA_ORDER_CREATED_TOPIC}
+    depends_on:
+      - postgres
+      - kafka
+
+  product-service:
+    build: ./product-service
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BROKER}
+      KAFKA_ORDER_CREATED_TOPIC: ${KAFKA_ORDER_CREATED_TOPIC}
+    depends_on:
+      - kafka
+
+  analytics-service:
+    build: ./analytics-service
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      Kafka__BootstrapServers: ${KAFKA_BROKER}
+      Kafka__OrderCreatedTopic: ${KAFKA_ORDER_CREATED_TOPIC}
+      Redis__ConnectionString: ${ANALYTICS_REDIS_CONNECTION}
+      Elasticsearch__Url: ${ANALYTICS_ELASTICSEARCH_URL}
+    depends_on:
+      - kafka
+      - redis
+      - elasticsearch
+
+  frontend:
+    build: ./frontend
+    environment:
+      VITE_API_BASE: /api
+    depends_on:
+      - gateway
+
+  nginx:
+    image: nginx:1.25
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - gateway
+      - frontend
+
+volumes:
+  pgdata:
+  esdata:

@@ -1,0 +1,73 @@
+name: CI-CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore & Build .NET services
+        run: |
+          dotnet build gateway/Gateway.Api.csproj --configuration Release
+          dotnet build order-service/src/OrderService.Api/OrderService.Api.csproj --configuration Release
+          dotnet build analytics-service/Analytics.Api.csproj --configuration Release
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - name: Build Product Service
+        run: mvn -f product-service/src/product-service/pom.xml -DskipTests package
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install & Build
+        working-directory: ./frontend
+        run: |
+          npm install
+          npm run build
+
+  docker-images:
+    runs-on: ubuntu-latest
+    needs: [build-backend, build-frontend]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & Push images
+        run: |
+          docker build -t ghcr.io/${{ github.repository }}/gateway:latest ./gateway
+          docker build -t ghcr.io/${{ github.repository }}/order-service:latest ./order-service
+          docker build -t ghcr.io/${{ github.repository }}/analytics-service:latest ./analytics-service
+          docker build -t ghcr.io/${{ github.repository }}/product-service:latest ./product-service
+          docker build -t ghcr.io/${{ github.repository }}/frontend:latest ./frontend
+
+          docker push ghcr.io/${{ github.repository }}/gateway:latest
+          docker push ghcr.io/${{ github.repository }}/order-service:latest
+          docker push ghcr.io/${{ github.repository }}/analytics-service:latest
+          docker push ghcr.io/${{ github.repository }}/product-service:latest
+          docker push ghcr.io/${{ github.repository }}/frontend:latest
