@@ -1,3 +1,4 @@
+using AnalyticsService;
 using AnalyticsService.Caching;
 using AnalyticsService.Messaging;
 using AnalyticsService.Services;
@@ -8,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<EventBus>();
 builder.Services.AddSingleton<RedisCacheService>();
 builder.Services.AddSingleton<IAnalyticsService, AnalyticsService.Services.AnalyticsService>();
 builder.Services.AddHostedService<OrderCreatedConsumer>();

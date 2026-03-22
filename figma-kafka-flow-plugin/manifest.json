@@ -1,0 +1,7 @@
+{
+  "name": "Kafka Order Flow Diagram",
+  "id": "kafka-order-flow-diagram",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figjam"]
+}

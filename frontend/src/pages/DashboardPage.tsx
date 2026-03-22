@@ -11,15 +11,49 @@ export default function DashboardPage() {
     dispatch(fetchDashboard());
   }, [dispatch]);
 
+  const totalSales = dashboard?.totalSales ?? 0;
+  const totalOrders = dashboard?.totalOrders ?? 0;
+  const topProduct = dashboard?.topProductId ?? "-";
+  const avgOrder = totalOrders > 0 ? (totalSales / totalOrders).toFixed(2) : "0.00";
+
   return (
-    <div>
-      <h2>Dashboard</h2>
-      <div style={{ display: "flex", gap: "1rem" }}>
-        <div>Toplam Satış: {dashboard?.totalSales ?? 0}</div>
-        <div>Sipariş Sayısı: {dashboard?.totalOrders ?? 0}</div>
-        <div>Top Ürün: {dashboard?.topProductId ?? "-"}</div>
+    <>
+      <div className="page-header">
+        <h2>Dashboard</h2>
+        <p>Gerçek zamanlı satış özeti</p>
       </div>
-      <SalesChart />
-    </div>
+
+      <div className="stat-grid">
+        <div className="stat-card">
+          <div className="stat-icon">💰</div>
+          <div className="stat-label">Toplam Satış</div>
+          <div className="stat-value">₺{Number(totalSales).toLocaleString("tr-TR")}</div>
+          <div className="stat-sub">Tüm zamanlar</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-icon">🧾</div>
+          <div className="stat-label">Sipariş Sayısı</div>
+          <div className="stat-value">{totalOrders}</div>
+          <div className="stat-sub">Toplam işlem</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-icon">⭐</div>
+          <div className="stat-label">En Çok Satan</div>
+          <div className="stat-value" style={{ fontSize: 18 }}>{topProduct}</div>
+          <div className="stat-sub">Top ürün ID</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-icon">📈</div>
+          <div className="stat-label">Ortalama Sipariş</div>
+          <div className="stat-value">₺{Number(avgOrder).toLocaleString("tr-TR")}</div>
+          <div className="stat-sub">Sipariş başına</div>
+        </div>
+      </div>
+
+      <div className="chart-card">
+        <h3>Haftalık Satış Trendi</h3>
+        <SalesChart />
+      </div>
+    </>
   );
 }
