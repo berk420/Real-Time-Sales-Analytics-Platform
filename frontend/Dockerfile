@@ -1,6 +1,6 @@
 FROM node:20 AS build
 WORKDIR /app
-COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* .npmrc* ./ 2>/dev/null || true
+COPY package.json ./
 RUN npm install
 COPY . .
 RUN npm run build

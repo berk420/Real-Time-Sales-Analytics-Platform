@@ -1,7 +1,6 @@
 using Confluent.Kafka;
 using System.Text.Json;
 using AnalyticsService.Services;
-using AnalyticsService.Search;
 
 namespace AnalyticsService.Messaging;
 
@@ -9,13 +8,11 @@ public class OrderCreatedConsumer : BackgroundService
 {
     private readonly IConfiguration _config;
     private readonly IAnalyticsService _analytics;
-    private readonly ElasticsearchIndexer _indexer;
 
-    public OrderCreatedConsumer(IConfiguration config, IAnalyticsService analytics, ElasticsearchIndexer indexer)
+    public OrderCreatedConsumer(IConfiguration config, IAnalyticsService analytics)
     {
         _config = config;
         _analytics = analytics;
-        _indexer = indexer;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -45,7 +42,6 @@ public class OrderCreatedConsumer : BackgroundService
             var createdAt = doc.GetProperty("CreatedAt").GetDateTime();
 
             await _analytics.UpdateFromOrderAsync(orderId, productId, quantity, totalAmount, createdAt, stoppingToken);
-            await _indexer.IndexOrderAsync(JsonSerializer.Deserialize<object>(cr.Message.Value)!);
         }
     }
 }

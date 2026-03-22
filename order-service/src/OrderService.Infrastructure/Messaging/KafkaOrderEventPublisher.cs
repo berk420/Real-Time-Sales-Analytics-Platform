@@ -1,5 +1,6 @@
 using Confluent.Kafka;
 using System.Text.Json;
+using Microsoft.Extensions.Configuration;
 using OrderService.Application.Interfaces;
 using OrderService.Domain.Entities;
 

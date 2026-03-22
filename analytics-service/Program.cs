@@ -1,6 +1,5 @@
 using AnalyticsService.Caching;
 using AnalyticsService.Messaging;
-using AnalyticsService.Search;
 using AnalyticsService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<RedisCacheService>();
-builder.Services.AddSingleton<ElasticsearchIndexer>();
-builder.Services.AddSingleton<IAnalyticsService, AnalyticsService>();
+builder.Services.AddSingleton<IAnalyticsService, AnalyticsService.Services.AnalyticsService>();
 builder.Services.AddHostedService<OrderCreatedConsumer>();
 
 var app = builder.Build();

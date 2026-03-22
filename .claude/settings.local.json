@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs ls:*)",
+      "Bash(pip show:*)",
+      "Bash(py --version)",
+      "Bash(py -3 -m pip show python-docx)",
+      "Bash(python3 -m pip show python-docx)",
+      "Bash(python3 -m pip install python-docx)",
+      "Bash(py -3 -m pip install python-docx)",
+      "Bash(py -3 generate_interview_doc.py)"
+    ]
+  }
+}

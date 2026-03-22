@@ -7,6 +7,6 @@
   <ItemGroup>
     <PackageReference Include="Confluent.Kafka" Version="2.4.0" />
     <PackageReference Include="StackExchange.Redis" Version="2.7.33" />
-    <PackageReference Include="Elasticsearch.Net" Version="8.13.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 </Project>

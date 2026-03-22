@@ -1,4 +1,4 @@
-using Yarp.ReverseProxy;
+using Yarp.ReverseProxy.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
