@@ -67,6 +67,9 @@ jobs:
   docker-images:
     runs-on: self-hosted
     needs: [build-backend, build-frontend]
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
 
@@ -79,14 +82,16 @@ jobs:
 
       - name: Build & Push images
         run: |
-          docker build -t ghcr.io/${{ github.repository }}/gateway:latest ./gateway
-          docker build -t ghcr.io/${{ github.repository }}/order-service:latest ./order-service
-          docker build -t ghcr.io/${{ github.repository }}/analytics-service:latest ./analytics-service
-          docker build -t ghcr.io/${{ github.repository }}/product-service:latest ./product-service
-          docker build -t ghcr.io/${{ github.repository }}/frontend:latest ./frontend
+          # GHCR imaj adları küçük harf olmalı; repo adını küçük harfe çevir.
+          REPO="ghcr.io/${GITHUB_REPOSITORY,,}"
+          docker build -t $REPO/gateway:latest ./gateway
+          docker build -t $REPO/order-service:latest ./order-service
+          docker build -t $REPO/analytics-service:latest ./analytics-service
+          docker build -t $REPO/product-service:latest ./product-service
+          docker build -t $REPO/frontend:latest ./frontend
 
-          docker push ghcr.io/${{ github.repository }}/gateway:latest
-          docker push ghcr.io/${{ github.repository }}/order-service:latest
-          docker push ghcr.io/${{ github.repository }}/analytics-service:latest
-          docker push ghcr.io/${{ github.repository }}/product-service:latest
-          docker push ghcr.io/${{ github.repository }}/frontend:latest
+          docker push $REPO/gateway:latest
+          docker push $REPO/order-service:latest
+          docker push $REPO/analytics-service:latest
+          docker push $REPO/product-service:latest
+          docker push $REPO/frontend:latest
