@@ -34,10 +34,19 @@ jobs:
           distribution: "temurin"
 
       # setup-java yalnızca JDK kurar; self-hosted runner'da mvn yok.
+      # Maven'ı açıkça indir, $HOME altında önbelleğe al ve PATH'e ekle.
       - name: Setup Maven
-        uses: stCarolas/setup-maven@v5
-        with:
-          maven-version: "3.9.9"
+        run: |
+          set -e
+          MAVEN_VERSION=3.9.9
+          MAVEN_HOME="$HOME/.maven/apache-maven-${MAVEN_VERSION}"
+          if [ ! -x "$MAVEN_HOME/bin/mvn" ]; then
+            echo "Maven ${MAVEN_VERSION} indiriliyor..."
+            mkdir -p "$HOME/.maven"
+            curl -fsSL "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/${MAVEN_VERSION}/apache-maven-${MAVEN_VERSION}-bin.tar.gz" -o /tmp/maven.tar.gz
+            tar -xzf /tmp/maven.tar.gz -C "$HOME/.maven"
+          fi
+          echo "$MAVEN_HOME/bin" >> "$GITHUB_PATH"
 
       - name: Build Product Service
         run: mvn -f product-service/src/product-service/pom.xml -DskipTests package
