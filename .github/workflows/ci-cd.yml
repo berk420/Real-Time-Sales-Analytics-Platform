@@ -9,6 +9,10 @@ on:
 jobs:
   build-backend:
     runs-on: self-hosted
+    env:
+      # Self-hosted runner'da varsayılan /usr/share/dotnet yazılabilir değil;
+      # kurulumu workspace içindeki yazılabilir bir dizine yönlendir.
+      DOTNET_INSTALL_DIR: ${{ github.workspace }}/.dotnet
     steps:
       - uses: actions/checkout@v4
 
