@@ -158,7 +158,7 @@ export default function PlaceOrderPage() {
                     Gönderiliyor…
                   </>
                 ) : (
-                  <>🛒 Sipariş Ver</>
+                  <>Sipariş Ver</>
                 )}
               </button>
             </form>

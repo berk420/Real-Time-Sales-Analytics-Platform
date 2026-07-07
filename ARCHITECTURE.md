@@ -99,7 +99,7 @@ Order Service ──Kafka──► Product Service  (bağımsız tüketir)
 
 ```mermaid
 graph TB
-    User(["🌐 Kullanıcı / Tarayıcı"])
+    User(["Kullanıcı / Tarayıcı"])
 
     subgraph Entry["Giriş Katmanı"]
         Nginx["Nginx 1.25\nReverse Proxy\nPort :80"]
@@ -263,14 +263,14 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-    subgraph Write["✍️ Yazma Yolu (Command)"]
+    subgraph Write["Yazma Yolu (Command)"]
         direction LR
         W1["POST /api/orders"] --> W2["Order Service"]
         W2 --> W3[("PostgreSQL\nKalıcı depo")]
         W2 --> W4[["Kafka\norder.created"]]
     end
 
-    subgraph ReadSync["📖 Senkron Okuma"]
+    subgraph ReadSync["Senkron Okuma"]
         R1["GET /api/orders"] --> R2["Order Service"]
         R2 --> R3[("PostgreSQL\nSorgu")]
 
@@ -278,14 +278,14 @@ flowchart TD
         R5 --> R6[("In-Memory\nJVM Heap")]
     end
 
-    subgraph ReadAsync["⚡ Asenkron Okuma (Cache)"]
+    subgraph ReadAsync["Asenkron Okuma (Cache)"]
         RA1["GET /api/analytics/dashboard"] --> RA2["Analytics Service"]
         RA2 -->|"Cache HIT"| RA3[("Redis\nTTL: 30s")]
         RA2 -->|"Cache MISS"| RA4["In-Memory Metrics\nHesapla"]
         RA4 --> RA3
     end
 
-    subgraph Search["🔍 Arama"]
+    subgraph Search["Arama"]
         S1["GET /api/search?q=..."] --> S2["Analytics Service"]
         S2 --> S3[("Elasticsearch\nFull-text sorgu")]
     end

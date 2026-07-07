@@ -349,7 +349,7 @@ export default function SimulationPage() {
   return (
     <>
       <div className="page-header">
-        <h2>🔥 Yük Simülasyonu</h2>
+        <h2>Yük Simülasyonu</h2>
         <p>nginx → gateway → Order Service → Kafka → Consumer pipeline'ını gerçek trafik altında izle</p>
       </div>
 
@@ -373,7 +373,7 @@ export default function SimulationPage() {
                 fontSize: 12, fontWeight: 700,
               }}
             >
-              {s === "slow" ? "🐢 30 sipariş" : s === "medium" ? "🚀 60 sipariş" : "⚡ 120 sipariş"}
+              {s === "slow" ? "30 sipariş" : s === "medium" ? "60 sipariş" : "120 sipariş"}
             </button>
           ))}
         </div>
@@ -492,7 +492,6 @@ export default function SimulationPage() {
             borderRadius: 10, padding: "14px 16px",
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
-              <span style={{ fontSize: 18 }}>🟡</span>
               <div>
                 <div style={{ fontSize: 11, fontWeight: 800, color: "#f9c84e", textTransform: "uppercase", letterSpacing: "0.06em" }}>
                   Kafka Broker — Cluster
@@ -558,7 +557,7 @@ export default function SimulationPage() {
               textTransform: "uppercase", letterSpacing: "0.06em",
               display: "flex", alignItems: "center", justifyContent: "space-between",
             }}>
-              <span>⚡ Concurrent Pipelines</span>
+              <span>Concurrent Pipelines</span>
               <span style={{ fontWeight: 400 }}>son {Math.min(cards.length, 9)} sipariş</span>
             </div>
             <div style={{ padding: "10px", maxHeight: 220, overflowY: "auto" }}>

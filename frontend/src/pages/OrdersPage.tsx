@@ -35,7 +35,6 @@ export default function OrdersPage() {
 
         {filtered.length === 0 ? (
           <div className="empty">
-            <div className="empty-icon">🧾</div>
             <p>Sipariş bulunamadı</p>
           </div>
         ) : (

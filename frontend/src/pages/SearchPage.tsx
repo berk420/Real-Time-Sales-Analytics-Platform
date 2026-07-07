@@ -51,7 +51,6 @@ export default function SearchPage() {
 
       {!q && (
         <div className="empty">
-          <div className="empty-icon">🔍</div>
           <p>Aramak istediğiniz kelimeyi yazın</p>
         </div>
       )}
@@ -112,7 +111,6 @@ export default function SearchPage() {
 
       {q && total === 0 && (
         <div className="empty">
-          <div className="empty-icon">😕</div>
           <p>"{query}" için sonuç bulunamadı</p>
         </div>
       )}

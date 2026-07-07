@@ -7,12 +7,12 @@ import PlaceOrderPage from "./pages/PlaceOrderPage";
 import SimulationPage from "./pages/SimulationPage";
 
 const navItems = [
-  { to: "/",            icon: "📊", label: "Dashboard",    end: true },
-  { to: "/place-order", icon: "🛒", label: "Sipariş Ver" },
-  { to: "/simulate",    icon: "🔥", label: "Simülasyon" },
-  { to: "/orders",      icon: "🧾", label: "Siparişler" },
-  { to: "/products",    icon: "📦", label: "Ürünler" },
-  { to: "/search",      icon: "🔍", label: "Arama" },
+  { to: "/",            label: "Dashboard",    end: true },
+  { to: "/place-order", label: "Sipariş Ver" },
+  { to: "/simulate",    label: "Simülasyon" },
+  { to: "/orders",      label: "Siparişler" },
+  { to: "/products",    label: "Ürünler" },
+  { to: "/search",      label: "Arama" },
 ];
 
 export default function App() {
@@ -32,7 +32,6 @@ export default function App() {
               end={item.end}
               className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}
             >
-              <span className="icon">{item.icon}</span>
               {item.label}
             </NavLink>
           ))}

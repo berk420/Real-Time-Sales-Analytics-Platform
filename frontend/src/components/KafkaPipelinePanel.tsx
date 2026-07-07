@@ -59,9 +59,9 @@ function parseOrderMeta(detail: string) {
 /* ─── visual primitives ─────────────────────────────────────────── */
 
 function StepRow({
-  icon, label, detail, status, timestamp, mono,
+  label, detail, status, timestamp, mono,
 }: {
-  icon: string; label: string; detail?: string; status: StepStatus; timestamp?: string; mono?: boolean;
+  label: string; detail?: string; status: StepStatus; timestamp?: string; mono?: boolean;
 }) {
   const colors: Record<StepStatus, string> = {
     idle: "#3a3f5c",
@@ -86,7 +86,7 @@ function StepRow({
         boxShadow: status === "active" ? `0 0 8px ${c}` : "none",
         transition: "all 0.4s",
       }}>
-        {status === "done" ? "✓" : status === "active" ? <PulseRing color={c} /> : icon}
+        {status === "done" ? "✓" : status === "active" ? <PulseRing color={c} /> : null}
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 4 }}>
@@ -122,9 +122,9 @@ function PulseRing({ color }: { color: string }) {
 }
 
 function SectionCard({
-  title, subtitle, accentColor, icon, children,
+  title, subtitle, accentColor, children,
 }: {
-  title: string; subtitle: string; accentColor: string; icon: string; children: React.ReactNode;
+  title: string; subtitle: string; accentColor: string; children: React.ReactNode;
 }) {
   return (
     <div style={{
@@ -137,7 +137,6 @@ function SectionCard({
         background: `${accentColor}0d`,
         display: "flex", alignItems: "center", gap: 8,
       }}>
-        <span style={{ fontSize: 16 }}>{icon}</span>
         <div>
           <div style={{ fontSize: 11, fontWeight: 800, color: accentColor, letterSpacing: "0.05em", textTransform: "uppercase" }}>
             {title}
@@ -401,7 +400,6 @@ export default function KafkaPipelinePanel({
           borderRadius: 10, color: "var(--text-muted)", textAlign: "center", gap: 12,
           padding: 24,
         }}>
-          <div style={{ fontSize: 42 }}>⚡</div>
           <div style={{ fontWeight: 700, fontSize: 14 }}>Pipeline Bekleniyor</div>
           <div style={{ fontSize: 12, lineHeight: 1.6 }}>
             Sipariş ver ve Kafka'nın<br />
@@ -423,43 +421,43 @@ export default function KafkaPipelinePanel({
 
           {/* Row 1: Producer → Broker */}
           <div style={{ display: "flex", gap: 8, alignItems: "stretch" }}>
-            <SectionCard title="Order Service" subtitle=".NET 8 / EF Core / Kafka Producer" accentColor="#6c63ff" icon="⚙️">
-              <StepRow icon="📡" label="HTTP POST alındı"       detail={st.http_recv?.detail}     status={st.http_recv?.status ?? "idle"}   timestamp={st.http_recv?.ts} />
-              <StepRow icon="🗄️" label="PostgreSQL'e kaydedildi" detail={st.db_save?.detail}      status={st.db_save?.status ?? "idle"}     timestamp={st.db_save?.ts} />
-              <StepRow icon="📝" label="Mesaj serialize edildi" detail={st.serialize?.detail}     status={st.serialize?.status ?? "idle"}   timestamp={st.serialize?.ts} />
-              <StepRow icon="📤" label="Broker'a gönderildi"    detail={st.produce?.detail}       status={st.produce?.status ?? "idle"}     timestamp={st.produce?.ts} />
-              <StepRow icon="✅" label="ACK alındı → 201"       detail={st.ack?.detail}           status={st.ack?.status ?? "idle"}         timestamp={st.ack?.ts} />
+            <SectionCard title="Order Service" subtitle=".NET 8 / EF Core / Kafka Producer" accentColor="#6c63ff">
+              <StepRow label="HTTP POST alındı"       detail={st.http_recv?.detail}     status={st.http_recv?.status ?? "idle"}   timestamp={st.http_recv?.ts} />
+              <StepRow label="PostgreSQL'e kaydedildi" detail={st.db_save?.detail}      status={st.db_save?.status ?? "idle"}     timestamp={st.db_save?.ts} />
+              <StepRow label="Mesaj serialize edildi" detail={st.serialize?.detail}     status={st.serialize?.status ?? "idle"}   timestamp={st.serialize?.ts} />
+              <StepRow label="Broker'a gönderildi"    detail={st.produce?.detail}       status={st.produce?.status ?? "idle"}     timestamp={st.produce?.ts} />
+              <StepRow label="ACK alındı → 201"       detail={st.ack?.detail}           status={st.ack?.status ?? "idle"}         timestamp={st.ack?.ts} />
             </SectionCard>
 
             <Arrow active={producerActive} />
 
-            <SectionCard title="Kafka Broker" subtitle="confluent/cp-kafka:7.6.0 · broker-1" accentColor="#f9c84e" icon="🟡">
-              <StepRow icon="📨" label="Broker mesajı aldı"       detail={st.broker_recv?.detail}      status={st.broker_recv?.status ?? "idle"}      timestamp={st.broker_recv?.ts} />
-              <StepRow icon="📋" label="Partition log'una yazıldı" detail={st.partition_write?.detail}  status={st.partition_write?.status ?? "idle"}  timestamp={st.partition_write?.ts} />
-              <StepRow icon="🔄" label="ISR replikasyonu"          detail={st.isr_sync?.detail}         status={st.isr_sync?.status ?? "idle"}         timestamp={st.isr_sync?.ts} />
+            <SectionCard title="Kafka Broker" subtitle="confluent/cp-kafka:7.6.0 · broker-1" accentColor="#f9c84e">
+              <StepRow label="Broker mesajı aldı"       detail={st.broker_recv?.detail}      status={st.broker_recv?.status ?? "idle"}      timestamp={st.broker_recv?.ts} />
+              <StepRow label="Partition log'una yazıldı" detail={st.partition_write?.detail}  status={st.partition_write?.status ?? "idle"}  timestamp={st.partition_write?.ts} />
+              <StepRow label="ISR replikasyonu"          detail={st.isr_sync?.detail}         status={st.isr_sync?.status ?? "idle"}         timestamp={st.isr_sync?.ts} />
               <div style={{ borderTop: "1px solid var(--border)", marginTop: 8, paddingTop: 8 }}>
-                <StepRow icon="📦" label="analytics-service poll"  detail={st.cg_poll?.detail}          status={st.cg_poll?.status ?? "idle"}          timestamp={st.cg_poll?.ts} />
-                <StepRow icon="📦" label="product-service poll"    detail={st.cg_poll_p?.detail}         status={st.cg_poll_p?.status ?? "idle"}        timestamp={st.cg_poll_p?.ts} />
+                <StepRow label="analytics-service poll"  detail={st.cg_poll?.detail}          status={st.cg_poll?.status ?? "idle"}          timestamp={st.cg_poll?.ts} />
+                <StepRow label="product-service poll"    detail={st.cg_poll_p?.detail}         status={st.cg_poll_p?.status ?? "idle"}        timestamp={st.cg_poll_p?.ts} />
               </div>
             </SectionCard>
           </div>
 
           {/* Row 2: Consumers */}
           <div style={{ display: "flex", gap: 8, alignItems: "stretch" }}>
-            <SectionCard title="Analytics Consumer" subtitle=".NET 8 · group: analytics-service" accentColor="#00c9a7" icon="📊">
-              <StepRow icon="📥" label="Mesaj fetch edildi"       detail={st.a_fetch?.detail}   status={st.a_fetch?.status ?? "idle"}   timestamp={st.a_fetch?.ts} />
-              <StepRow icon="🔍" label="Payload parse edildi"     detail={st.a_parse?.detail}   status={st.a_parse?.status ?? "idle"}   timestamp={st.a_parse?.ts} />
-              <StepRow icon="📈" label="Analytics state güncellendi" detail={st.a_update?.detail} status={st.a_update?.status ?? "idle"} timestamp={st.a_update?.ts} />
-              <StepRow icon="🗑️" label="Redis cache temizlendi"   detail={st.a_cache?.detail}   status={st.a_cache?.status ?? "idle"}   timestamp={st.a_cache?.ts} />
-              <StepRow icon="✔️" label="Offset commit edildi"     detail={st.a_offset?.detail}  status={st.a_offset?.status ?? "idle"}  timestamp={st.a_offset?.ts} />
+            <SectionCard title="Analytics Consumer" subtitle=".NET 8 · group: analytics-service" accentColor="#00c9a7">
+              <StepRow label="Mesaj fetch edildi"       detail={st.a_fetch?.detail}   status={st.a_fetch?.status ?? "idle"}   timestamp={st.a_fetch?.ts} />
+              <StepRow label="Payload parse edildi"     detail={st.a_parse?.detail}   status={st.a_parse?.status ?? "idle"}   timestamp={st.a_parse?.ts} />
+              <StepRow label="Analytics state güncellendi" detail={st.a_update?.detail} status={st.a_update?.status ?? "idle"} timestamp={st.a_update?.ts} />
+              <StepRow label="Redis cache temizlendi"   detail={st.a_cache?.detail}   status={st.a_cache?.status ?? "idle"}   timestamp={st.a_cache?.ts} />
+              <StepRow label="Offset commit edildi"     detail={st.a_offset?.detail}  status={st.a_offset?.status ?? "idle"}  timestamp={st.a_offset?.ts} />
             </SectionCard>
 
             <Arrow active={brokerActive} />
 
-            <SectionCard title="Product Consumer" subtitle="Spring Boot 3.3 · group: product-service" accentColor="#fd9644" icon="📦">
-              <StepRow icon="📥" label="Mesaj fetch edildi"   detail={st.p_fetch?.detail}   status={st.p_fetch?.status ?? "idle"}   timestamp={st.p_fetch?.ts} />
-              <StepRow icon="🔧" label="Stok azaltıldı"      detail={st.p_stock?.detail}   status={st.p_stock?.status ?? "idle"}   timestamp={st.p_stock?.ts} />
-              <StepRow icon="✔️" label="Offset commit edildi" detail={st.p_offset?.detail}  status={st.p_offset?.status ?? "idle"}  timestamp={st.p_offset?.ts} />
+            <SectionCard title="Product Consumer" subtitle="Spring Boot 3.3 · group: product-service" accentColor="#fd9644">
+              <StepRow label="Mesaj fetch edildi"   detail={st.p_fetch?.detail}   status={st.p_fetch?.status ?? "idle"}   timestamp={st.p_fetch?.ts} />
+              <StepRow label="Stok azaltıldı"      detail={st.p_stock?.detail}   status={st.p_stock?.status ?? "idle"}   timestamp={st.p_stock?.ts} />
+              <StepRow label="Offset commit edildi" detail={st.p_offset?.detail}  status={st.p_offset?.status ?? "idle"}  timestamp={st.p_offset?.ts} />
             </SectionCard>
           </div>
         </div>

@@ -25,25 +25,21 @@ export default function DashboardPage() {
 
       <div className="stat-grid">
         <div className="stat-card">
-          <div className="stat-icon">💰</div>
           <div className="stat-label">Toplam Satış</div>
           <div className="stat-value">₺{Number(totalSales).toLocaleString("tr-TR")}</div>
           <div className="stat-sub">Tüm zamanlar</div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon">🧾</div>
           <div className="stat-label">Sipariş Sayısı</div>
           <div className="stat-value">{totalOrders}</div>
           <div className="stat-sub">Toplam işlem</div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon">⭐</div>
           <div className="stat-label">En Çok Satan</div>
           <div className="stat-value" style={{ fontSize: 18 }}>{topProduct}</div>
           <div className="stat-sub">Top ürün ID</div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon">📈</div>
           <div className="stat-label">Ortalama Sipariş</div>
           <div className="stat-value">₺{Number(avgOrder).toLocaleString("tr-TR")}</div>
           <div className="stat-sub">Sipariş başına</div>

@@ -42,7 +42,6 @@ export default function ProductsPage() {
 
         {filtered.length === 0 ? (
           <div className="empty">
-            <div className="empty-icon">📦</div>
             <p>Ürün bulunamadı</p>
           </div>
         ) : (

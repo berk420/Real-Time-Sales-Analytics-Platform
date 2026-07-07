@@ -251,11 +251,11 @@
   mkText(mvs, "Monolit  vs  Mikroservis", 16, 9, 12, "Bold", C.white);
 
   const mono = mkBox(mvs, 16, 44, 320, 104, C.redL, 8);
-  mkText(mono, "❌  Monolitik Yaklaşım", 12, 10, 11, "Bold", C.red);
+  mkText(mono, "Monolitik Yaklaşım", 12, 10, 11, "Bold", C.red);
   mkText(mono, "• Bir değişiklik tümünü deploy eder\n• Analytics yükü sipariş yazımını etkiler\n• Tek dil/framework zorunlu\n• Scale sadece bütünü scale eder", 12, 30, 10, "Regular", C.dark, 296);
 
   const micro = mkBox(mvs, 360, 44, 340, 104, C.greenL, 8);
-  mkText(micro, "✅  Mikroservis Yaklaşım", 12, 10, 11, "Bold", C.green);
+  mkText(micro, "Mikroservis Yaklaşım", 12, 10, 11, "Bold", C.green);
   mkText(micro, "• Her servis bağımsız deploy/scale\n• Analytics çökmesi siparişi etkilemez\n• Farklı dil serbestliği (polyglot)\n• Yeni servis mevcut kodu bozmaz", 12, 30, 10, "Regular", C.dark, 316);
 
   // ─ 1c: Senkron vs Asenkron
@@ -264,11 +264,11 @@
   mkText(svsa, "Senkron HTTP  vs  Asenkron Kafka Event", 16, 9, 12, "Bold", C.white);
 
   const sync = mkBox(svsa, 16, 44, 320, 104, C.redL, 8);
-  mkText(sync, "❌  Senkron HTTP Zinciri", 12, 10, 11, "Bold", C.red);
+  mkText(sync, "Senkron HTTP Zinciri", 12, 10, 11, "Bold", C.red);
   mkText(sync, "• Product çökerse sipariş başarısız olur\n• Analytics gecikmesi latency'ye eklenir\n• Servisler sıkı bağlı (tight coupling)\n• Her yeni servis çağrı eklemeyi gerektirir", 12, 30, 10, "Regular", C.dark, 296);
 
   const async_ = mkBox(svsa, 360, 44, 340, 104, C.greenL, 8);
-  mkText(async_, "✅  Kafka Event (Asenkron)", 12, 10, 11, "Bold", C.green);
+  mkText(async_, "Kafka Event (Asenkron)", 12, 10, 11, "Bold", C.green);
   mkText(async_, "• Order Service kimsenin dinleyip\n  dinlemediğini bilmez\n• Consumer çökmesi producer'ı etkilemez\n• Yeni consumer = sıfır mevcut kod değişikliği", 12, 30, 10, "Regular", C.dark, 316);
 
   Y += 180 + GAP;
@@ -521,7 +521,7 @@
     ["Neden In-Memory?", 11,"Bold",C.teal],
     ["• Stok = türetilmiş veri (event'ten)\n• Sıfır DB latency\n• Restart'ta Kafka replay mümkün", 10,"Regular",C.dark],
     ["", 0],
-    ["⚠️  Kısıt", 11,"Bold",C.orange],
+    ["Kısıt", 11,"Bold",C.orange],
     ["Restart'ta stok sıfırlanır.\nProduction'da event store\nveya Kafka replay gerekir.", 10,"Regular",C.dark],
   ], 400);
 
@@ -656,7 +656,7 @@
   Y += 28;
 
   mkTable(canvas, PAD, Y, CW,
-    ["Karar","✓ Avantaj","⚠️  Kabul Edilen Kısıt","Production Çözümü"],
+    ["Karar","✓ Avantaj","Kabul Edilen Kısıt","Production Çözümü"],
     [
       ["Product Service in-memory stok","Sıfır DB latency · Sade kod","Restart'ta stok sıfırlanır","Kafka replay veya Event Store"],
       ["Analytics in-memory metrics","Hızlı hesaplama · Basit kod","Restart'ta metric kaybı","Kafka replay (offset 0'dan)"],
