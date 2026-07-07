@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UNZvKgW7J7g=",
+  "dgSpecHash": "li41K/yExKg=",
   "success": true,
-  "projectFilePath": "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Infrastructure\\OrderService.Infrastructure.csproj",
+  "projectFilePath": "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Infrastructure\\OrderService.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\berk\\.nuget\\packages\\confluent.kafka\\2.4.0\\confluent.kafka.2.4.0.nupkg.sha512",
     "C:\\Users\\berk\\.nuget\\packages\\librdkafka.redist\\2.4.0\\librdkafka.redist.2.4.0.nupkg.sha512",

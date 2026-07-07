@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\analytics-service\\Analytics.Api.csproj": {}
+    "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\analytics-service\\Analytics.Api.csproj": {}
   },
   "projects": {
-    "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\analytics-service\\Analytics.Api.csproj": {
+    "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\analytics-service\\Analytics.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\analytics-service\\Analytics.Api.csproj",
+        "projectUniqueName": "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\analytics-service\\Analytics.Api.csproj",
         "projectName": "Analytics.Api",
-        "projectPath": "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\analytics-service\\Analytics.Api.csproj",
+        "projectPath": "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\analytics-service\\Analytics.Api.csproj",
         "packagesPath": "C:\\Users\\berk\\.nuget\\packages\\",
-        "outputPath": "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\analytics-service\\obj\\",
+        "outputPath": "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\analytics-service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

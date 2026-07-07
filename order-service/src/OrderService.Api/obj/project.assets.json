@@ -1442,11 +1442,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Api\\OrderService.Api.csproj",
+      "projectUniqueName": "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Api\\OrderService.Api.csproj",
       "projectName": "OrderService.Api",
-      "projectPath": "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Api\\OrderService.Api.csproj",
+      "projectPath": "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Api\\OrderService.Api.csproj",
       "packagesPath": "C:\\Users\\berk\\.nuget\\packages\\",
-      "outputPath": "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Api\\obj\\",
+      "outputPath": "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1467,14 +1467,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Application\\OrderService.Application.csproj": {
-              "projectPath": "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Application\\OrderService.Application.csproj"
+            "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Application\\OrderService.Application.csproj": {
+              "projectPath": "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Application\\OrderService.Application.csproj"
             },
-            "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Domain\\OrderService.Domain.csproj": {
-              "projectPath": "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Domain\\OrderService.Domain.csproj"
+            "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Domain\\OrderService.Domain.csproj": {
+              "projectPath": "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Domain\\OrderService.Domain.csproj"
             },
-            "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Infrastructure\\OrderService.Infrastructure.csproj": {
-              "projectPath": "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Infrastructure\\OrderService.Infrastructure.csproj"
+            "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Infrastructure\\OrderService.Infrastructure.csproj": {
+              "projectPath": "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\order-service\\src\\OrderService.Infrastructure\\OrderService.Infrastructure.csproj"
             }
           }
         }

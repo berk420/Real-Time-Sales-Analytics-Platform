@@ -98,11 +98,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\gateway\\Gateway.Api.csproj",
+      "projectUniqueName": "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\gateway\\Gateway.Api.csproj",
       "projectName": "Gateway.Api",
-      "projectPath": "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\gateway\\Gateway.Api.csproj",
+      "projectPath": "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\gateway\\Gateway.Api.csproj",
       "packagesPath": "C:\\Users\\berk\\.nuget\\packages\\",
-      "outputPath": "E:\\workspace\\Real-Time-Sales-Analytics-Platform\\gateway\\obj\\",
+      "outputPath": "C:\\workspace\\Real-Time-Sales-Analytics-Platform\\gateway\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
