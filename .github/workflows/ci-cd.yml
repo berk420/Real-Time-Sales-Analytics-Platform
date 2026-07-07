@@ -33,6 +33,12 @@ jobs:
           java-version: "17"
           distribution: "temurin"
 
+      # setup-java yalnızca JDK kurar; self-hosted runner'da mvn yok.
+      - name: Setup Maven
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: "3.9.9"
+
       - name: Build Product Service
         run: mvn -f product-service/src/product-service/pom.xml -DskipTests package
 
