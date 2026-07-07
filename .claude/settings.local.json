@@ -8,7 +8,8 @@
       "Bash(python3 -m pip show python-docx)",
       "Bash(python3 -m pip install python-docx)",
       "Bash(py -3 -m pip install python-docx)",
-      "Bash(py -3 generate_interview_doc.py)"
+      "Bash(py -3 generate_interview_doc.py)",
+      "Read(//home/berk/.claude/**)"
     ]
   }
 }
