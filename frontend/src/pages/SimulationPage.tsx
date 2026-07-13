@@ -48,7 +48,7 @@ const STEP_LABELS: Record<string, string> = {
   analytics_update: "Analytics güncelleniyor",
   cache_invalidated:"Redis cache temizlendi",
   stock_update:     "Stok azaltıldı",
-  completed:        "Tamamlandı ✓",
+  completed:        "Tamamlandı",
 };
 
 /* ─── helpers ───────────────────────────────────────────────────── */
@@ -388,7 +388,7 @@ export default function SimulationPage() {
             fontSize: 12, fontWeight: 700,
           }}
         >
-          ↺ Sıfırla
+          Sıfırla
         </button>
         <button
           onClick={running ? stopSim : startSim}

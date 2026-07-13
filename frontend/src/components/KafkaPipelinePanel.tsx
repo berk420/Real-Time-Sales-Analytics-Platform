@@ -86,7 +86,7 @@ function StepRow({
         boxShadow: status === "active" ? `0 0 8px ${c}` : "none",
         transition: "all 0.4s",
       }}>
-        {status === "done" ? "✓" : status === "active" ? <PulseRing color={c} /> : null}
+        {status === "active" ? <PulseRing color={c} /> : null}
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 4 }}>
